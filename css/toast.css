@@ -1,0 +1,104 @@
+/* ===== Toast Notifications ===== */
+
+/*
+ * HOW IT WORKS:
+ * The toast container is fixed to the top-right of the screen.
+ * Each toast slides in from the right, stays for 4 seconds, then fades out.
+ * We use CSS classes (.toast--success, .toast--error) to color-code them.
+ */
+
+/* Container: holds all toasts, stacked vertically in the top-right corner */
+.toast-container {
+  position: fixed;
+  top: 70px;           /* below the topbar */
+  right: 20px;
+  z-index: 9999;       /* above everything, including modals */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none; /* let clicks pass through the empty container */
+}
+
+/* Individual toast */
+.toast {
+  pointer-events: auto;         /* but each toast IS clickable */
+  min-width: 280px;
+  max-width: 400px;
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;              /* click to dismiss early */
+
+  /* Animation: slide in from the right */
+  animation: toast-in 0.4s ease forwards;
+}
+
+/* When we add .toast--hide, it fades out to the right */
+.toast.toast--hide {
+  animation: toast-out 0.3s ease forwards;
+}
+
+/* Color variations */
+.toast--success {
+  background: #16a34a;          /* green */
+}
+
+.toast--error {
+  background: #dc2626;          /* red */
+}
+
+.toast--info {
+  background: #2563eb;          /* blue */
+}
+
+/* The icon inside the toast */
+.toast-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+/* The dismiss × button */
+.toast-close {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 0 0 10px;
+  line-height: 1;
+}
+
+.toast-close:hover {
+  color: #fff;
+}
+
+/* Keyframe animations */
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);   /* start off-screen to the right */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);      /* slide into place */
+  }
+}
+
+@keyframes toast-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);   /* slide back out to the right */
+  }
+}
+
