@@ -6,8 +6,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $pwd = $_POST['pwd'];
 
     try {
-        require_once 'dbh.php';
-        require_once 'login-inc-Controller.php';
+        require 'dbh.php';
+        require 'login-inc-Controller.php';
 
         if (Fields_are_empty($email, $pwd)) {
             $_SESSION['login_error'] = 'Please fill in all fields.';
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['user_name'] = $result['name'];
             $_SESSION['user_email'] = $result['email'];
 
-            // Redirect admin to the admin panel, everyone else to dashboard
+         
             if ((int) $result['id'] === 1 && $result['name'] === 'admin') {
                 header('Location: ../Admin.php');
             } else {

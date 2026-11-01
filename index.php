@@ -12,7 +12,7 @@ unset($_SESSION['register_error']);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Class Attendance | Login</title>
+  <title>Signup Page</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 
